@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
+import { HttpClientModule } from '@angular/common/http';
+import { InMemoryDataService } from './in-memory-data.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      delay: 2000
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
