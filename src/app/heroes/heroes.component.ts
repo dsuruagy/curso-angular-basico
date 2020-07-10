@@ -19,4 +19,13 @@ export class HeroesComponent implements OnInit {
   getHeroes() {
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
   }
+
+  onAdd(name: string) {
+    this.heroService.addHero({ name } as Hero).subscribe((hero) => {
+      if(hero) {
+        // Atualiza apenas no client, sem chamar o backend desnecessariamente
+        this.heroes.push(hero);
+      }
+    })
+  }
 }

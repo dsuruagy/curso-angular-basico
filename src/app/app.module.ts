@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryDataService } from './in-memory-data.service';
+import { HeroAddComponent } from './hero-add/hero-add.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { InMemoryDataService } from './in-memory-data.service';
     HeroDetailComponent,
     MessagesComponent,
     NavBarComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroAddComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,7 @@ import { InMemoryDataService } from './in-memory-data.service';
     NgbModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      delay: 2000
+      delay: 500
     })
   ],
   providers: [],
