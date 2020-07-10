@@ -23,7 +23,7 @@ export class HeroService {
     private http: HttpClient) { }
 
   getHeroes(): Observable<Hero[]> {
-    return this.http.get<Hero[]>(this.heroesUrl)
+    return this.http.get<Hero[]>(this.heroesUrl, this.httpOptions)
       .pipe(
         tap(_ => this.log('Obtida a lista de Heróis.')),
         catchError(this.handleError<Hero[]>('getHeroes', []))
@@ -31,7 +31,7 @@ export class HeroService {
   }
 
   getHero(id: number): Observable<Hero> {
-    return this.http.get<Hero>(`${this.heroesUrl}/${id}`)
+    return this.http.get<Hero>(`${this.heroesUrl}/${id}`, this.httpOptions)
       .pipe(
         tap(_ => this.log(`Obtido o herói de id=${id}`)),
         catchError(this.handleError<Hero>(`getHero id=${id}`))
@@ -62,7 +62,7 @@ export class HeroService {
   deleteHero(hero: Hero): Observable<any> { // any, pois não retorna um Hero
     const url = `${this.heroesUrl}/${hero.id}`
 
-    return this.http.delete<Hero>(url)
+    return this.http.delete<Hero>(url, this.httpOptions)
       .pipe(
         tap(_ => this.log(`Apagado o herói de id=${hero.id}`)),
         catchError(this.handleError<Hero>(`deleteHero id=${hero.id}`))
@@ -74,7 +74,7 @@ export class HeroService {
     if(!(term && term.trim())) {
       return of([]);
     }
-    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`)
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`, this.httpOptions)
       .pipe(
         tap(heroes => {
           heroes && heroes.length
