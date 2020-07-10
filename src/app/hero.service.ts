@@ -36,7 +36,7 @@ export class HeroService {
       );
   }
 
-  // PUT /hero/1
+  // PUT /heroes/1
   updateHero(hero: Hero): Observable<Hero> {
     const url = `${this.heroesUrl}/${hero.id}`
 
@@ -47,7 +47,7 @@ export class HeroService {
       );
   }
 
-  // POST /hero
+  // POST /heroes
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions)
       .pipe(
@@ -56,7 +56,7 @@ export class HeroService {
       );
   }
 
-  // DELETE /hero/id
+  // DELETE /heroes/id
   deleteHero(hero: Hero): Observable<any> { // any, pois não retorna um Hero
     const url = `${this.heroesUrl}/${hero.id}`
 
@@ -64,6 +64,22 @@ export class HeroService {
       .pipe(
         tap(_ => this.log(`Apagado o herói de id=${hero.id}`)),
         catchError(this.handleError<Hero>(`deleteHero id=${hero.id}`))
+      );
+  }
+
+  // GET /heroes/?name=term
+  searchHeroes(term: string): Observable<Hero[]> {
+    if(!(term && term.trim())) {
+      return of([]);
+    }
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`)
+      .pipe(
+        tap(heroes => {
+          heroes && heroes.length
+            ? this.log(`Encontrado  termo=${term} e ${heroes.length} heróis`)
+            : this.log(`não encontrado o termo ${term}`)
+        }),
+        catchError(this.handleError<Hero[]>('getHeroes', []))
       );
   }
 

@@ -40,3 +40,5 @@ Observações Daniel:
 - Ferramentas para teste de API REST:
   - https://insomnia.rest/
   - https://www.postman.com/ 
+
+- RXJS - debounceTime: usado para não ir ao backend imediatamente, enquanto o usuário está digitando na caixa de busca.
