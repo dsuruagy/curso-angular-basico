@@ -52,7 +52,6 @@ export class HeroService {
         tap(newHero => this.log(`Adicionado o herói de id=${newHero.id}`)),
         catchError(this.handleError<Hero>(`addHero id=${hero.id}`))
       );
-
   }
 
   log(message: string) {
