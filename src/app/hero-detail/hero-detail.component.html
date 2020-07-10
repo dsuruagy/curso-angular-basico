@@ -21,6 +21,12 @@
           [(ngModel)]="hero.name"/>
       </div>
 
+      <button class="btn btn-primary mr-3"
+      [disabled]="!hero.name"
+      (click)="save()">
+        Salvar
+      </button>
+
       <button class="btn btn-secondary" (click)="goBack()">
         Voltar
       </button>

@@ -3,7 +3,7 @@ import { Hero } from './hero.model';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,7 +12,12 @@ import { environment } from 'src/environments/environment';
 export class HeroService {
   private heroesUrl = `${environment.baseUrl}/heroes`;
 
-  constructor(private messageService: MessageService,
+  private httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  };
+
+  constructor(
+    private messageService: MessageService,
     private http: HttpClient) { }
 
   getHeroes(): Observable<Hero[]> {
@@ -28,6 +33,16 @@ export class HeroService {
       .pipe(
         tap(_ => this.log(`Obtido o herói de id=${id}`)),
         catchError(this.handleError<Hero>(`getHero id=${id}`))
+      );
+  }
+
+  updateHero(hero: Hero): Observable<Hero> {
+    const url = `${this.heroesUrl}/${hero.id}`
+
+    return this.http.put<Hero>(url, hero, this.httpOptions)
+      .pipe(
+        tap(_ => this.log(`Incluindo o herói de id=${hero.id}`)),
+        catchError(this.handleError<Hero>(`getHero id=${hero.id}`))
       );
   }
 

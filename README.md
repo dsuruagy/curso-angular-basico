@@ -35,10 +35,8 @@ Observações Daniel:
 
 - Ctrl+D: renomeia uma variável em várias linhas
 
-Plugin: Settings Sync, para sincronizar as configurações no Github e usar em várias instalações.
+- Plugin: Settings Sync, para sincronizar as configurações no Github e usar em várias instalações.
 
-selectedHero: Hero;
-
-  onSelect(hero: Hero) {
-    this.selectedHero = hero;
-  }
+- Ferramentas para teste de API REST:
+  - https://insomnia.rest/
+  - https://www.postman.com/ 
